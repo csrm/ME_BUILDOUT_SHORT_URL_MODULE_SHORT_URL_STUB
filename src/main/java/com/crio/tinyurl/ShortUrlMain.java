@@ -3,8 +3,6 @@ package com.crio.tinyurl;
 public class ShortUrlMain {
 
   public static void main(String[] args) {
-    // FIXME Number of hits
-    // FIXME hint for hashmap
 
     ShortUrl shortUrl = new ShortUrlImpl();
     String url = shortUrl.registerNewUrl("http://abc.com");
@@ -28,8 +26,11 @@ public class ShortUrlMain {
     assert(shortUrl.getUrl(url2).equals(shortUrl.getUrl(url4)));
     assert(shortUrl.getUrl(url4).equals(shortUrl.getUrl(url6)));
     assert(shortUrl.getUrl(url5).equals("http://abc3.com"));
+    assert(shortUrl.getHitCount("http://abc2.com").equals(4));
+    assert(shortUrl.getHitCount("http://abcn.com").equals(0));
 
-    //Another test to generate 50k urls
+    shortUrl.delete("http://abc3.com");
+    assert(shortUrl.getUrl(url5) == null);
   }
 }
 

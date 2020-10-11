@@ -49,7 +49,10 @@ public class ShortUrlImpl implements ShortUrl {
     }
     //get the long URL hit count
     public Integer getHitCount(String longUrl){
-       return (Integer)lookUp.get(longUrl);
+       Integer count = (Integer)lookUp.get(longUrl);
+       if(count==null)
+         return 0;
+       return count;
     }
     //delete the longURL & shortURL relation
     public String delete(String longUrl){
